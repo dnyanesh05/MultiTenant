@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+    <IsPackable>false</IsPackable>
+    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="**/*" />
+    <Content Include="**/*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="src\app\components\" />
+    <Folder Include="src\interceptors\" />
+  </ItemGroup>
+  <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+</PropertyGroup>
+</Project>

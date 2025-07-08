@@ -1,0 +1,54 @@
+<div class="user-container">
+  <h2>User Management</h2>
+  <p><strong>Tenant ID:</strong> {{ tenantId }}</p>
+
+  <!-- Add User Form -->
+  <form class="user-form" (ngSubmit)="addUser()" #addForm="ngForm">
+    <div class="form-group">
+      <input [(ngModel)]="newUser.name" name="name" required placeholder="Full Name" />
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="newUser.username" name="username" required placeholder="Username" />
+    </div>
+    <div class="form-group">
+      <input [(ngModel)]="newUser.email" name="email" required placeholder="Email" />
+    </div>
+    <button type="submit" [disabled]="addForm.invalid">Add User</button>
+  </form>
+
+  <h3>Users List</h3>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <ng-container *ngIf="editingId !== user.id; else editRow">
+          <td>{{ user.name }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <button class="edit-btn" (click)="startEdit(user)">Edit</button>
+            <button class="delete-btn" (click)="deleteUser(user.id)">Delete</button>
+          </td>
+        </ng-container>
+
+        <ng-template #editRow>
+          <td><input [(ngModel)]="editUser.name" name="editName" /></td>
+          <td><input [(ngModel)]="editUser.username" name="editUsername" /></td>
+          <td><input [(ngModel)]="editUser.email" name="editEmail" /></td>
+          <td>
+            <button class="save-btn" (click)="saveEdit(user.id)">Save</button>
+            <button class="cancel-btn" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
